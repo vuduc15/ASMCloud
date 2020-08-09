@@ -11,10 +11,10 @@
 </head>
 
 <style>
-    body{
+    body {
         background-image: url("/images/5.jpg");
         background-size: cover;
-  		
+
     }
 </style>
 
@@ -26,24 +26,27 @@
         Search: <input type="text" name="txtName" id="" placeholder="Enter your name...">
         <input type="submit" value="Research">
     </form>
-    <table class="table table-hover" border="2">
-        <tr align="center">
-            <td>Id</td>
-            <td>Name</td>
-            <td>Type</td>
-            <td>Price(VND)</td>
-            <td>Delete</td>
-        </tr>
-        {{#each model}}
-        <tr align="center">
-            <td>{{_id}}</td>
-            <td>{{name}}</td>
-            <td>{{type}}</td>
-            <td>{{price}}</td>
-            <td><a href="/remove?id={{_id}}">Delete</a></td>
-        </tr>
-        {{/each}}
-    </table>
+    <div style="color: antiquewhite;">
+        <table class="table table-hover" border="2">
+            <tr align="center">
+                <td>Id</td>
+                <td>Name</td>
+                <td>Type</td>
+                <td>Price(VND)</td>
+                <td>Delete</td>
+            </tr>
+            {{#each model}}
+            <tr align="center">
+                <td>{{_id}}</td>
+                <td>{{name}}</td>
+                <td>{{type}}</td>
+                <td>{{price}}</td>
+                <td><a href="/remove?id={{_id}}">Delete</a></td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+
 </body>
 
 </html>
