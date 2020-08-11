@@ -66,7 +66,7 @@ app.get('/research', async (req, res) => {
     let client = await MongoClient.connect(url);
     let dbo = client.db("Storeman");
     let result = await dbo.collection("Product").find({
-        name: inputName
+        name: new RegExp("^" + inputName, "i")
     }).toArray();
     res.render('index', {
         model: result
