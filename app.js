@@ -27,17 +27,23 @@ app.post("/doInsert", async (req, res) => {
     let inputName = req.body.txtName;
     let inputType = req.body.txtType;
     let inputPrice = req.body.txtPrice;
-    let newProduct = {
-        name: inputName,
-        type: inputType,
-        price: inputPrice,
-    };
-
-    let client = await MongoClient.connect(url);
-    let dbo = client.db("Storeman");
-    await dbo.collection("Product").insertOne(newProduct);
-    // res.redirect('/student');
-    res.redirect('/');
+    if(inputName.length <4){
+        let errorModel = {nameError: "Ten phai lon hon 3 ki tu"};
+        res.render('insert',{model:errorModel})
+    } else {
+        let newProduct = {
+            name: inputName,
+            type: inputType,
+            price: inputPrice,
+        };
+    
+        let client = await MongoClient.connect(url);
+        let dbo = client.db("Storeman");
+        await dbo.collection("Product").insertOne(newProduct);
+        // res.redirect('/student');
+        res.redirect('/');
+    }
+    
 });
 
 //localhost:3000
