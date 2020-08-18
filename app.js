@@ -27,11 +27,7 @@ app.post("/doInsert", async (req, res) => {
     let inputName = req.body.txtName;
     let inputType = req.body.txtType;
     let inputPrice = req.body.txtPrice;
-    let newProduct = {
-        name: inputName,
-        type: inputType,
-        price: inputPrice,
-    };
+    let newProduct = {name: inputName,type: inputType,price: inputPrice,};
     let client = await MongoClient.connect(url);
     let dbo = client.db("Storeman");
     if(isNaN(inputPrice)){
@@ -41,27 +37,22 @@ app.post("/doInsert", async (req, res) => {
         await dbo.collection("Product").insertOne(newProduct);
         res.redirect('/');
     }
-    
-});
+})
 
 //localhost:3000
 app.get('/', async function (req, res) {
     let client = await MongoClient.connect(url);
     let dbo = client.db("Storeman");
     let result = await dbo.collection("Product").find({}).toArray();
-    res.render('index', {
-        model: result
-    });
+    res.render('index', {model: result});
 })
 
 app.get('/remove', async (req, res) => {
     let id = req.query.id;
-    let ObjectID = require('mongodb').ObjectID;
+    var ObjectID = require('mongodb').ObjectID;
     let client = await MongoClient.connect(url);
     let dbo = client.db("Storeman");
-    await dbo.collection("Product").deleteOne({
-        _id: ObjectID(id)
-    });
+    await dbo.collection("Product").deleteOne({_id: ObjectID(id)});
     res.redirect('/');
 })
 
