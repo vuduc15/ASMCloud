@@ -56,16 +56,14 @@ app.get('/remove', async (req, res) => {
     res.redirect('/');
 })
 
-app.get('/research', async (req, res) => {
+app.get('/search', async (req, res) => {
     let inputName = req.query.txtName;
     let client = await MongoClient.connect(url);
     let dbo = client.db("Storeman");
     let result = await dbo.collection("Product").find({
         name: new RegExp("^" + inputName, "i")
     }).toArray();
-    res.render('index', {
-        model: result
-    });
+    res.render('index', {model: result});
 })
 
 app.listen(process.env.PORT || 3000, () => {
