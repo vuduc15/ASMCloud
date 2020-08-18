@@ -60,9 +60,7 @@ app.get('/search', async (req, res) => {
     let inputName = req.query.txtName;
     let client = await MongoClient.connect(url);
     let dbo = client.db("Storeman");
-    let result = await dbo.collection("Product").find({
-        name: new RegExp("^" + inputName, "i")
-    }).toArray();
+    let result = await dbo.collection("Product").find({name: new RegExp("^" + inputName, "i")}).toArray();
     res.render('index', {model: result});
 })
 
